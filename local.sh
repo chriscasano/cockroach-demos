@@ -7,6 +7,17 @@
 
 echo -e 'Enterprise License: '$COCKROACH_DEV_LICENSE
 
+if ( [ "$1" == "help" ] || [ "$1" == "--help" ] )
+then
+  echo "Wrapper script for running local roachprod clusters"
+  echo ""
+  echo "usage:          local.sh version nodes cli"
+  echo "******************************************"
+  echo "use defaults:   local.sh"
+  echo "use specifics:  local.sh 20.1.0 5 N"
+  exit 1;
+fi
+
 ## Parameter check
 
 if [ -z "$1" ]
