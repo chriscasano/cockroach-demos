@@ -17,16 +17,18 @@ Once you have a sql command prompt, you can run each of these lines one at a tim
 
 `cockroach demo --geo-partitioned-replicas --with-load`
 
-`\! aws s3 rm 's3://chrisc-test/backup/' --recursive`
+`\! aws s3 rm 's3://chrisc-test/backup/demo/' --recursive`
 
-`backup database movr to 's3://chrisc-test/backup/2020-05-01-FULL?AUTH=implicit' as of system time '-10s';`
+`backup database movr to 's3://chrisc-test/backup/demo?AUTH=implicit' as of system time '-10s' with revision_history;`
 
-`show backup 's3://chrisc-test/backup/2020-05-01-FULL?AUTH=implicit';`
+`show backup 's3://chrisc-test/backup/demo?AUTH=implicit';`
 
-`backup database movr to 's3://chrisc-test/backup/2020-05-01-INCR1?AUTH=implicit' as of system time '-10s' INCREMENTAL FROM 's3://chrisc-test/backup/2020-05-01-FULL?AUTH=implicit';`
+`backup database movr to 's3://chrisc-test/backup/demo?AUTH=implicit' as of system time '-10s' with revision_history;`
+
+`show backup 's3://chrisc-test/backup/demo?AUTH=implicit';`
 
 `use defaultdb;`
 
 `alter database movr rename to movr_old;`
 
-`restore database movr from 's3://chrisc-test/backup/2020-05-01-FULL?AUTH=implicit';`
+`restore database movr from 's3://chrisc-test/backup/demo?AUTH=implicit' as of system time '2020-09-29 02:54:00.26744+00:00'`

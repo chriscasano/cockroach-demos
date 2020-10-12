@@ -5,7 +5,7 @@
 #  2) nodes
 #  3) start cli (Y/N)
 
-echo -e 'Enterprise License: '$COCKROACH_DEV_LICENSE
+#echo -e 'Enterprise License: '$COCKROACH_DEV_LICENSE
 
 if ( [ "$1" == "help" ] || [ "$1" == "--help" ] )
 then
@@ -22,7 +22,7 @@ fi
 
 if [ -z "$1" ]
 then
-  VERSION=20.1.0
+  VERSION=20.1.6
 else
   VERSION=$1
 fi
@@ -66,7 +66,7 @@ haproxy -f ${DIR}/haproxy/haproxy.cfg &
 ## Set License and open Admin UI
 
 echo "Set Enterprise License"
-cockroach sql --insecure --echo-sql -e "SET CLUSTER SETTING cluster.organization = 'Cockroach Labs - Production Testing';" -e "SET CLUSTER SETTING enterprise.license ='${COCKROACH_DEV_LICENSE}';" -e "SET CLUSTER SETTING kv.rangefeed.enabled=true;"
+cockroach sql --insecure -e "SET CLUSTER SETTING cluster.organization = 'Cockroach Labs - Production Testing';" -e "SET CLUSTER SETTING enterprise.license ='${COCKROACH_DEV_LICENSE}';" -e "SET CLUSTER SETTING kv.rangefeed.enabled=true;"
 roachprod adminurl ${CLUSTER}:1 --open --ips
 
 ## Load data into extern directories for importing

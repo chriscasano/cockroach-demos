@@ -5,14 +5,14 @@
 
 
 export old_bin=19.2.5
-export new_bin=20.1.0
+export new_bin=20.1.6
 
 ../local.sh 19.2.5 5 N
 
 sleep 5
 
 cockroach workload init ycsb
-cockroach workload run ycsb --duration=5m --max-rate=50 --concurrency=2 --display-every=60s --tolerate-errors "postgresql://root@localhost:26000/ycsb?sslmode=disable" &
+cockroach workload run ycsb --duration=15m --max-rate=50 --concurrency=2 --display-every=60s --tolerate-errors "postgresql://root@localhost:26000/ycsb?sslmode=disable" &
 
 sleep 10
 
